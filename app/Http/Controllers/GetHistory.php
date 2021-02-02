@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class GetHistory extends Controller
 {
+    //указываем реальный адрес сервис
+    const JSON_RPC_SERVICE_API_RPC = 'json_rpc.service/api/rpc';
+
     /**
      * Handle the incoming request.
      *
@@ -15,7 +18,7 @@ class GetHistory extends Controller
      */
     public function __invoke(Request $request)
     {
-        $client = new Client('json_rpc.service/api/rpc');//указываем реальный адрес сервис
+        $client = new Client(self::JSON_RPC_SERVICE_API_RPC);
         $params = new \stdClass();
         $params->lastDays = '30';
         $result = $client->weather->getHistory($params);
